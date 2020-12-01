@@ -1,7 +1,16 @@
 @font-face {
     font-family: 'friz_quadrataregular';
-    src: url('fonts/friz_quadrata_regular-webfont.woff2') format('woff2'),
-         url('fonts/friz_quadrata_regular-webfont.woff') format('woff');
+    src: url('fonts/friz/friz_quadrata_regular-webfont.woff2') format('woff2'),
+         url('fonts/friz/friz_quadrata_regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'boomer_tantrumregular';
+    src: url('fonts/boomertantrum/boomertantrum-j88y-webfont.woff2') format('woff2'),
+         url('fonts/boomertantrum/boomertantrum-j88y-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 
@@ -63,7 +72,7 @@ body {
 .result-container {
     position: relative;
     padding: 20px;
-    padding-bottom: 6px;
+    padding-bottom: 0px;
     border: white;
     border-style: solid;
     border-width: 2px;
@@ -72,7 +81,7 @@ body {
     margin-right: auto;
 }
 
-.result-container::before {
+ .results-background {
     content: "";
     background-image: url("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg");
     background-repeat: no-repeat;
@@ -83,8 +92,10 @@ body {
     right: 0px;
     bottom: 0px;
     left: 0px;
-    opacity: 0.4;
+    opacity: .3;
+
 }
+
 
 .champion-result {
     position: relative;
@@ -153,12 +164,13 @@ h1 {
 .stats-broken-down {
     padding-left: 10px;
     padding-right: 10px;
-    font-size: 40px;
-    font-weight: 1000;
+    font-size: 45px;
     display: flex;
     justify-content: space-around;
     background-color: rgba(255, 255, 255, 0.322);
     align-items: center;
+    font-family: 'boomer_tantrumregular';
+    padding-left 10px;
 }
 
 .stats-broken-down div {
@@ -200,7 +212,7 @@ tr {
 }
 
 .icon { 
-    width: 40px;
+    width: 48px;
 }
 
 .lore {
