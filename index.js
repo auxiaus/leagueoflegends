@@ -21,7 +21,7 @@ function App() {
         $.get (specificJson)
         .done (function (specificChamp) {
             specificChampData = specificChamp.data;
-            populateSkins();  
+            populateSkins();
         })
         .fail (function () {
             console.error("Invalid data");
@@ -51,16 +51,18 @@ function App() {
     function populateSkins() {
 
         var skinSelector = $(".skin-select");
+        var allSkins = [];
 
         var results = Object.values(specificChampData);
         results.map(i => {
-            i.skins.map(results => {
-                var option = $("<option>"+results.name+"</option>");
+            allSkins = i.skins;
+            allSkins.map(skin => {
+                var option =  $("<option>"+skin.name+"</option>");
                 skinSelector.append(option);
             })
         });
-
-        skinSelector.removeAttr("disabled");  
+        
+        skinSelector.removeAttr("disabled");
     }
 
     function onChampionSelect() {
