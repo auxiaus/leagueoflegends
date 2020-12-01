@@ -1,6 +1,6 @@
 function App() {
     var championsData;
-    var skinsList;
+    var specificChampData;
     function retrieveChampions() {
         $.get ("http://ddragon.leagueoflegends.com/cdn/10.24.1/data/en_US/champion.json")
             .done (function (result) {
@@ -20,11 +20,11 @@ function App() {
         var specificJson = "http://ddragon.leagueoflegends.com/cdn/10.24.1/data/en_US/champion/Aatrox.json";
         $.get (specificJson)
             .done (function (specificChamp) {
-                skinsList = specificChamp.data;
-                
+                specificChampData = specificChamp.data;
+
                 populateSkins();
 
-                console.log(skinsList);    
+                console.log(specificChamp);    
        
             })
             
@@ -54,15 +54,17 @@ function App() {
 
         // Populate Skins Drop Down
         function populateSkins() {
-            var data = skinsList;
+            var data = specificChampData;
             var skins = $(".skin-select");
-            var skinsArray = Object.keys(data);
+            var skinsArray = specificChampData.Aatrox.skins;
+            console.log(skinsArray.map{i => i});
             for (var i = 0; i < skinsArray.length; i++) {
                 var option = $("<option>"+skinsArray[i]+"</option>");
                 skins.append(option);
             }     
             // Populate selectelement with data              
             skins.removeAttr("disabled");    
+        
         }
 
     function onChampionSelect() {
@@ -98,7 +100,8 @@ function App() {
         $(".tag-1").text(currentChampion.tags); 
         /* $(".tag-2").text(currentChampion.tags[1]); */
         $(".loading-splash").attr("src", "http://ddragon.leagueoflegends.com/cdn/img/champion/loading/"+selectedOption.text()+"_0.jpg");  
-        $(".results-background").css('background-image', 'url(' + newBackground + ')');
+        $(".result-container-img").attr("src", newBackground);
+        
     }
 
     retrieveChampions();
