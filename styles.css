@@ -71,7 +71,6 @@ body {
 
 .result-container {
     position: relative;
-    /* padding: 20px; */
     padding-bottom: 0px;
     border: solid white 2px;
     max-width: 1400px;
@@ -80,10 +79,6 @@ body {
 }
 
  .results-background {
-    background-repeat: no-repeat;
-    background-position: top center;
-    background-size: 100% auto;
-    /* position: absolute; */
     top: 0px;
     right: 0px;
     bottom: 0px;
@@ -91,13 +86,11 @@ body {
 }
 
 .result-container-img-wrapper {
-    top: 0;
-    left: 0;
-    background-size: 100% auto;
-    width: 100%;
     opacity: 0.3;
-    padding: 0;
-    margin: 0;
+}
+
+.result-container-img {
+    width: 100%;
 }
 
 .champion-result {
