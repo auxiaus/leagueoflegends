@@ -71,35 +71,41 @@ body {
 
 .result-container {
     position: relative;
-    padding: 20px;
+    /* padding: 20px; */
     padding-bottom: 0px;
-    border: white;
-    border-style: solid;
-    border-width: 2px;
+    border: solid white 2px;
     max-width: 1400px;
     margin-left: auto;
     margin-right: auto;
 }
 
  .results-background {
-    content: "";
-    background-image: url("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg");
     background-repeat: no-repeat;
     background-position: top center;
     background-size: 100% auto;
-    position: absolute;
+    /* position: absolute; */
     top: 0px;
     right: 0px;
     bottom: 0px;
     left: 0px;
-    opacity: .3;
-
 }
 
+.result-container-img-wrapper {
+    top: 0;
+    left: 0;
+    background-size: 100% auto;
+    width: 100%;
+    opacity: 0.3;
+    padding: 0;
+    margin: 0;
+}
 
 .champion-result {
-    position: relative;
     font-family: Verdana, Geneva, sans-serif;
+    position: absolute;
+    top: 0;
+    margin: 20px;
+    z-index: 9;
 }
 
 .champion-title {
@@ -170,7 +176,8 @@ h1 {
     background-color: rgba(255, 255, 255, 0.322);
     align-items: center;
     font-family: 'boomer_tantrumregular';
-    padding-left 10px;
+    padding-left: 10px;
+    margin-right: -20px;
 }
 
 .stats-broken-down div {
