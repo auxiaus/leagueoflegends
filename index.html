@@ -15,6 +15,12 @@
 
     <div class="result-container">
     <!-- <div class="result-container" style="background-image: url('http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg'); background-repeat: no-repeat; background-position: top center; background-size: 100% auto; position: absolute; top: 0px; right: 0px; bottom: 0px; left: 0px; opacity: 0.4;"> -->
+        <div class="result-container-img-wrapper" >
+            <img class="result-container-img" src="http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg"/>
+        </div>
+        <!-- <div class="mobile-container-img-wrapper" >
+            <img class="mobile-container-img" src="http://ddragon.leagueoflegends.com/cdn/img/champion/loading/Aatrox_0.jpg"/>
+        </div> -->
         <div class="champion-result">
             <div class="champion-info">
                 <div class="portrait-container">
@@ -22,35 +28,51 @@
                 </div>
 
                 <div class="champion-stats">
-                    <h1><span class="champion-name">Aatrox</span><span class="champion-title"> the Darkin Blade</span></h1>
+                    <div class="square-title">
+                        <img class="champion-square" src="http://ddragon.leagueoflegends.com/cdn/10.24.1/img/champion/Aatrox.png" />
+                        <h1><span class="champion-name">Aatrox</span><span>, </span><span class="champion-title">the Darkin Blade</span></h1>
+                    </div>
+                    <!-- <div class="blurb">
+                        <p class="champion-blurb">Once honored defenders of Shurima against the Void, Aatrox and his brethren would eventually become an even greater threat to Runeterra, and were defeated only by cunning mortal sorcery. But after centuries of imprisonment, Aatrox was the first to find freedom once more, corrupting and transforming those foolish enough to try and wield the magical weapon that contained his essence. Now, with stolen flesh, he walks Runeterra in a brutal approximation of his previous form, seeking an apocalyptic and long overdue vengeance.</p>
+                    </div> -->
                     <div class="tags">
-                        <span class="tag-1">Fighter</span>
+                        <span class="tag">Fighter</span>
+                        <span class="tag">Fighter</span>
+                        <span class="tag">Fighter</span>
                         <!-- <span class="tag-2"></span> -->
                     </div>
-                    <div>
+                    <div class="main-div">
 
                             <div class="stats-broken-down">
                                 <div>
-                                    <img class="icon" src="img/attack.png" />
+                                    <img class="icon" src="img/attack.svg" />
                                     <span class="attack">12</span>
                                 </div>
                                 <div>
-                                    <img class="icon" src="img/defence.png" />
+                                    <img class="icon" src="img/defence.svg" />
                                     <span class="defence">4</span>
                                 </div>
                                 <div>
-                                    <img class="icon" src="img/magic.png" />
+                                    <img class="icon" src="img/magic.svg" />
                                     <span class="magic">2</span>
                                 </div>
                                 <div>
-                                    <img class="icon" src="img/difficulty.png" />
+                                    <img class="icon" src="img/difficulty.svg" />
                                     <span class="difficulty">5</span>
 
                             </div>
 
                         </div>
                         <div class="stats-lore-flex">
+                            
+                            <div class="lore">
+                                <span>Lore</span>
+                                <p class="champion-lore">Once honored defenders of Shurima against the Void, Aatrox and his brethren would eventually become an even greater threat to Runeterra, and were defeated only by cunning mortal sorcery. But after centuries of imprisonment, Aatrox was the first to find freedom once more, corrupting and transforming those foolish enough to try and wield the magical weapon that contained his essence. Now, with stolen flesh, he walks Runeterra in a brutal approximation of his previous form, seeking an apocalyptic and long overdue vengeance.</p>
+                                
+
+                            </div>
                             <div class="tabled-stats">
+                                <span>Stats</span>
                                 <table>
                                     <tr>
                                         <td class="tabled-stats-header">HP</td>
@@ -70,18 +92,36 @@
                                     </tr>
                                 </table>
                             </div>
-                            <div class="lore">
-                                <span class="lore-label">Blurb</span>
-                                <p class="champion-lore">Once honored defenders of Shurima against the Void, Aatrox and his brethren would eventually become an even greater threat to Runeterra, and were defeated only by cunning mortal sorcery. But after centuries of imprisonment, Aatrox was the first to find freedom once more, corrupting and transforming those foolish enough to try and wield the magical weapon that contained his essence. Now, with stolen flesh, he walks Runeterra in a brutal approximation of his previous form, seeking an apocalyptic and long overdue vengeance.</p>
+                            
+                        </div>      
+                        <span class="spells-title">Spells</span>
+                        <div class="spells">
+                            <div>
+                                <img class="q-spell-icon" src="https://static.wikia.nocookie.net/leagueoflegends/images/c/c0/Deathbringer_Stance.png/revision/latest/scale-to-width-down/64?cb=20180612213546" />
+                                <span class="q-spell-desc">Q: FIRST CAST: Aatrox's first strike affects a 625 × 180-unit rectangular area in the target direction, with Aatrox centered on the back line and the Sweetspot at the farthest edge.</span>
                             </div>
+                            <div>
+                                <img class="w-spell-icon" src="https://static.wikia.nocookie.net/leagueoflegends/images/6/63/Infernal_Chains.png/revision/latest/scale-to-width-down/64?cb=20180612213332" />
+                                <span class="w-spell-desc">W: ACTIVE: Aatrox smashes the ground in the target direction, creating a chain that stops on the first enemy hit, dealing physical damage, doubled against Minion icon.png minions, and Slow icon.png slowing them by 25% for 1.5 seconds</span>
+                            </div>
+                            <div>
+                                <img class="e-spell-icon" src="https://static.wikia.nocookie.net/leagueoflegends/images/c/c0/Deathbringer_Stance.png/revision/latest/scale-to-width-down/64?cb=20180612213546" />
+                                <span class="e-spell-desc">E: PASSIVE: Aatrox heals for a percentage of the non-Blaze.png persistent post-mitigation damage he deals against enemy champions.
+
+                                    ACTIVE: Aatrox dashes in the target direction.</span>
+                            </div>
+                            <div>
+                                <img class="r-spell-icon" src="https://static.wikia.nocookie.net/leagueoflegends/images/d/de/World_Ender.png/revision/latest/scale-to-width-down/64?cb=20180612213606" />
+                                <span class="r-spell-desc">R: ACTIVE: Aatrox unleashes his true demonic form, causing all nearby enemy Minion icon.png minions and Monster icon.png monsters to Flee icon.png flee from him for 3 seconds, during which they are rapidly Slow icon.png slowed by up to 99% over the duration. For the next 10 seconds, Aatrox gains Ghost.png ghosting and Movement speed icon.png bonus movement speed, decaying by 10% of the current bonus every 0.25 seconds.</span>
+                            </div>
+                        </div>                  
                         </div>
-                        </div>
+
                 </div>
                 
             </div>
 
         </div>
-        <div class="results-background"></div>
         <div class="empty-result">
             <h1>No Results</h1>
         </div>

@@ -1,89 +1,121 @@
 function App() {
+
     var championsData;
-    var skinsList;
+    var specificChampData;
+
     function retrieveChampions() {
         $.get ("http://ddragon.leagueoflegends.com/cdn/10.24.1/data/en_US/champion.json")
-            .done (function (result) {
-                championsData = result.data;
-
-                populateChampions();
-            })
+        .done (function (result) {
+            championsData = result.data;
             
-            .fail (function () {
-                console.error("Invalid data");
-            });
-       
+            
+            populateChampions();
+
+            console.log(championsData);
+        })
+        .fail (function () {
+            console.error("Invalid data");
+        });
     }
 
-    function retrieveSpecificChampion() { 
-        var selectedOption = $(".champion-select option:selected");
-        var specificJson = "http://ddragon.leagueoflegends.com/cdn/10.24.1/data/en_US/champion/Aatrox.json";
-        $.get (specificJson)
-            .done (function (specificChamp) {
-                skinsList = specificChamp.data;
-                
-                populateSkins();
+    function retrieveSpecificChampion(championName) {
+        var url = "http://ddragon.leagueoflegends.com/cdn/10.24.1/data/en_US/champion/" + championName + ".json";
 
-                console.log(skinsList);    
-       
-            })
+        $.get (url)
+        .done (function (result) {
+            specificChampData = result.data[championName];
+
+            console.log(`${championName} Details:`, specificChampData);
             
-            .fail (function () {
-                console.error("Invalid data");
-            });
-       
+            updateChampionData();
+            
+            populateSkins();
+            updateSkinsData();
+        })
+        .fail (function () {
+            console.error("Invalid data");
+        });
     }
 
     // Populate Champions Drop Down
     function populateChampions() {
-        console.log(championsData);
+
+        // console.log(championsData);
         var data = championsData;
         var champions = $(".champion-select");
         var championArray = Object.keys(data);
+        
         for (var i = 0; i < championArray.length; i++) {
-            var option = $("<option>"+championArray[i]+"</option>");
+
+            var champion = championsData[championArray[i]];
+
+            var option = $(`<option value="${champion.id}">${champion.name}, ${champion.title}</option>`);
             champions.append(option);
         } 
-        // Pupulate selectelement with data
-          
+
+        // Populate selectelement with data
         champions.removeAttr("disabled");
+        
         onChampionSelect();
+
         var selectedOption = $(".champion-select option:selected"); 
-        updateChampionData(selectedOption.text());
+        retrieveSpecificChampion(selectedOption.val());
     }
 
-        // Populate Skins Drop Down
-        function populateSkins() {
-            var data = skinsList;
-            var skins = $(".skin-select");
-            var skinsArray = Object.keys(data);
-            for (var i = 0; i < skinsArray.length; i++) {
-                var option = $("<option>"+skinsArray[i]+"</option>");
-                skins.append(option);
-            }     
-            // Populate selectelement with data              
-            skins.removeAttr("disabled");    
-        }
+    // Populate Skins Drop Down
+    function populateSkins() {
+        var skinSelector = $(".skin-select");
+        var results = Object.values(specificChampData);
+
+        $('.skin-select').find('option').remove();
+
+        specificChampData.skins.map(function (skin){
+            // If skin name is default change to "Default Skin"
+            var option =  $(`<option value="${skin.num}">${skin.name}</option>`);
+
+            if (skin.name === 'default') {
+                option.text("Default");
+            }
+            skinSelector.append(option);
+        });
+
+      
+        skinSelector.removeAttr("disabled");
+
+        onSkinSelect();
+    }
 
     function onChampionSelect() {
         var champions = $(".champion-select");
        
         champions.on("change", function () {
             var selectedOption = $(".champion-select option:selected");
-            updateChampionData(selectedOption.text());
+            retrieveSpecificChampion(selectedOption.val());
         });
-        // Detect when chamption is selected
-
-        // Show data
     }
 
+    function onSkinSelect() {
+        var skins = $(".skin-select");
+       
+        skins.on("change", function () {
+            var selectedOption = $(".skin-select option:selected");
+            updateSkinsData(selectedOption.val());
+        });
+    }
+
+
+    // Spell API:
+    // http://ddragon.leagueoflegends.com/cdn/10.24.1/img/spell/AatroxQ.png
+
+    // Give it detailed champion object
     function updateChampionData(championName) {
         // Update all data
         var selectedOption = $(".champion-select option:selected");
-        var newBackground = "http://ddragon.leagueoflegends.com/cdn/img/champion/splash/"+selectedOption.text()+"_0.jpg";
-        console.log("Update data for:", championName);
-        console.log(newBackground);
-        var currentChampion = championsData[championName];
+        
+        // console.log("Update data for:", championName);
+        // console.log(newBackground);
+        var currentChampion = specificChampData;
+        console.log(currentChampion);
         $(".champion-name").text(currentChampion.name);
         $(".champion-title").text(currentChampion.title);
         $(".attack").text(currentChampion.info.attack);
@@ -94,16 +126,54 @@ function App() {
         $(".hitpoints").text(currentChampion.stats.hp);
         $(".armour").text(currentChampion.stats.armor);
         $(".mana").text(currentChampion.stats.mp);
-        $(".champion-lore").text(currentChampion.blurb);
-        $(".tag-1").text(currentChampion.tags); 
-        /* $(".tag-2").text(currentChampion.tags[1]); */
-        $(".loading-splash").attr("src", "http://ddragon.leagueoflegends.com/cdn/img/champion/loading/"+selectedOption.text()+"_0.jpg");  
-        $(".results-background").css('background-image', 'url(' + newBackground + ')');
+        $(".champion-lore").text(specificChampData.lore);
+        $(".tag-1").text(currentChampion.tags);
+        $(".q-spell-icon").attr("src", `http://ddragon.leagueoflegends.com/cdn/10.24.1/img/spell/${specificChampData.spells[0].id}.png`)
+        $(".w-spell-icon").attr("src", `http://ddragon.leagueoflegends.com/cdn/10.24.1/img/spell/${specificChampData.spells[1].id}.png`)
+        $(".e-spell-icon").attr("src", `http://ddragon.leagueoflegends.com/cdn/10.24.1/img/spell/${specificChampData.spells[2].id}.png`)
+        $(".r-spell-icon").attr("src", `http://ddragon.leagueoflegends.com/cdn/10.24.1/img/spell/${specificChampData.spells[3].id}.png`)
+        $(".q-spell-desc").html(specificChampData.spells[0].description);
+        $(".w-spell-desc").html(specificChampData.spells[1].description);
+        $(".e-spell-desc").html(specificChampData.spells[2].description);
+        $(".r-spell-desc").html(specificChampData.spells[3].description);
+
+        $('.tags').children().remove();    
+        var tagsSelector = $('.tags');
+        specificChampData.tags.map(function (champTags) {
+            console.log("CHAMP TAGS", champTags);
+            // If skin name is default change to "Default Skin"
+            var tagResult =  $(`<span class="tag">${champTags}</span>`);
+            tagsSelector.append(tagResult);
+        });
     }
 
+    function updateSkinsData(skinNum) {
+        console.log("Find skin", skinNum);
+
+        var championName = specificChampData.id;
+        var selectedSkin;
+
+        if (!skinNum) {
+            skinNum = specificChampData.skins[0].num;
+            selectedSkin = specificChampData.skins[0];
+        } else {
+            specificChampData.skins.map(function (skin) {
+                if (skin.num === skinNum) {
+                    selectedSkin = skin;
+                }
+            });
+        }
+        
+        console.log(selectedSkin);
+
+        $(".result-container-img").attr("src", `http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${championName}_${skinNum}.jpg`);
+        $(".loading-splash").attr("src", `http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${championName}_${skinNum}.jpg`);  
+        $(".champion-square").attr("src", `http://ddragon.leagueoflegends.com/cdn/10.24.1/img/champion/${championName}.png`)
+    }
+
+    
     retrieveChampions();
-    retrieveSpecificChampion()
+
 }
 
 var app = new App();
-
